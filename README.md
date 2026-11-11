@@ -12,6 +12,8 @@
 
 <br/>
 
+<img width="1280" height="436" alt="toolbar" src="https://github.com/user-attachments/assets/cd6e6805-1090-416d-884f-8c77f3b8a58f" />
+
 [**📥 Download QuickShot Setup (v1.0.0)**](https://github.com/moshclusive/quickshot/releases/download/v1.0.0/QuickShot-Setup.exe)
 
 </div>
