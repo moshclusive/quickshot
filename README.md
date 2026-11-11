@@ -190,12 +190,9 @@ QuickShot includes powerful pro modifiers inspired by industry-standard graphic 
 
 ---
 
-## 🤝 Contributing
+## 🤝 DONATE
 
-Contributions are what make the open-source community an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**!
-
-Please see our [**Contributing Guide (CONTRIBUTING.md)**](CONTRIBUTING.md) for detailed guidelines on opening issues, feature suggestions, code style, and submitting pull requests.
-
+Buy me a Coffee. Here is the [Coffee shop]([url](https://www.supportkori.com/moshclusive)) 😂
 ---
 
 ## 📄 License
