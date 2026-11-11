@@ -12,7 +12,7 @@
 
 <br/>
 
-[**📥 Download QuickShot Setup (v1.0.0)**](https://github.com/moshclusive/quickshot/releases/download/v1.0.0/QuickShot-Setup.exe) • [**📖 Documentation**](#-feature-walkthrough) • [**⌨️ Shortcuts**](#-keyboard-shortcuts) • [**🤝 Contributing**](CONTRIBUTING.md)
+[**📥 Download QuickShot Setup (v1.0.0)**](https://github.com/moshclusive/quickshot/releases/download/v1.0.0/QuickShot-Setup.exe)
 
 </div>
 
@@ -20,22 +20,20 @@
 
 ## 🚀 Overview
 
-**QuickShot** is a next-generation desktop capture suite built from scratch in C# with native Win32 hardware acceleration. It combines the snappy lightweight feel of classic screenshot tools with the advanced power of modern capture studios: pixel-perfect scrolling capture, high-frame-rate GIF recording, universal multi-language OCR, smart optical annotations, and floating pin-to-screen reference cards.
-
-No heavy dependencies. No command-line FFmpeg bloat. Zero lag. Instant startup.
+*QuickShot* is a fast, lightweight Windows screen capture software built in C# using native Win32 APIs for zero-lag performance. It handles full scrolling captures, high-FPS GIFs, multilingual OCR, and floating on-screen pins—without the bloat of heavy capture suites.
 
 ---
 
 ## 🎯 Highlights
 
-- **⚡ Blazing Fast**: Zero-latency overlay activation with native GDI+ hardware acceleration.
-- **📜 Pixel-Perfect Scrolling Capture**: Auto-scrolls and stitches full-page websites, chats, and documents with smart floating-element sanitization (strips repetitive sticky headers and floating widgets).
-- **🔒 Document-Locked Annotations**: Annotations stay 100% locked to their original position on the scrolled document—no drifting when scrolling up or down.
-- **🎥 Clean GIF Screen Recorder**: Record high-quality animated GIFs with a floating control bar placed cleanly outside the capture area, plus smooth yellow mouse highlight halos.
-- **🧠 Universal Any-Language OCR**: Extract text from any screen region in 100+ languages (English, Bengali, and more) with an instant text-casing transformer.
-- **🖍️ True Optical Highlighter**: Employs mathematical Multiply (light mode) and Screen (dark mode) blending—text underneath is always 100% sharp and readable.
-- **📌 Pin to Screen**: Pin any capture snippet as an always-on-top floating desktop widget.
-- **🎨 Modern Dark UI Studio**: Fast history dashboard with icon-only action cards (`Copy`, `Open`, `Delete`), customizable hotkeys, and automatic clipboard sync.
+- ⚡ **Instant Overlay** – Launches immediately with zero UI lag using native GDI+ rendering.
+- 📜 **Smart Scrolling Capture** – Stitches long pages, documents, and chats while automatically filtering out repetitive sticky headers and floating bars.
+- ⚓ **Anchored Annotations** – Drawings and text stay locked to their exact coordinates on the document without shifting as you scroll.
+- 🎥 **Clean GIF Recording** – Records smooth animated clips with mouse-click halos; controls stay completely outside the capture area.
+- 🔤 **Multilingual OCR** – Extract text directly from your screen in 100+ languages (including English and Bengali) with quick case-conversion tools.
+- 🖍️ **Legible Highlighting** – Applies proper blend modes (Multiply for light backgrounds, Screen for dark) so text underneath remains crisp and easy to read.
+- 📌 **Pin to Desktop** – Keep any screenshot snippet floating always-on-top as an active reference while you work.
+- 📋 **History & Quick Actions** – Search past captures, trigger one-click actions (`Copy`, `Open`, `Delete`), configure global hotkeys, and sync straight to the clipboard.
 
 ---
 
@@ -56,56 +54,53 @@ You can run `QuickShot.exe` directly from the release folder without running an 
 
 ## 🛠️ Feature Walkthrough
 
-### 1. 📐 Precision Region Capture
-- **Rectangular Snip**: Click and drag across any screen or multi-monitor setup. Real-time dimensions pill shows exact width $\times$ height.
-- **Freehand Lasso Mode**: Cut out arbitrary, organic shapes and irregular selections with fluid curves.
-- **Pixel Magnifier HUD**: Shows 8x zoomed pixel grid and exact RGB color values around the cursor for pixel-level accuracy.
+### 1. 📐 Area Selection & Precision Snip
+- 🔲 **Rectangular Snip** – Drag across single or multi-monitor setups. An on-screen dimension badge displays the exact width × height in real time.
+- ➰ **Freehand Lasso** – Outline irregular shapes and organic cutouts smoothly.
+- 🔍 **Pixel Magnifier** – An 8× zoom loupe with live RGB color values helps you align edges down to the exact pixel.
 
 ---
 
-### 2. 📜 Next-Gen Scrolling Capture
-Tired of screenshot tools that break when pages have sticky headers or floating buttons?
-- **Intelligent Sticky Sanitizer**: Automatically detects and prevents repetitive floating widgets (such as floating chat icons or navigation bars) from multiplying in the stitched output.
-- **Sub-Pixel Motion Tracking**: Tracks 1-pixel granular movements for ultra-smooth vertical and horizontal document scrolling.
-- **100% Anchored Document Annotations**: Draw annotations on the document *before* or *during* scrolling—annotations remain strictly anchored to their target elements even after multiple scroll passes.
+### 2. 📜 Scrolling Capture
+- 🚫 **Sticky Element Filtering** – Automatically detects and ignores fixed navbars, floating chat bubbles, and sticky headers so they don't repeat in the stitched image.
+- 🔄 **Seamless Alignment** – Tracks vertical and horizontal movement frame-by-frame for clean stitching without seam tears.
+- ⚓ **Anchored Markups** – Add notes while scrolling; drawings and arrows stay locked to their respective page sections instead of drifting over the screen.
 
 ---
 
-### 3. 🎞️ Lightweight Screen GIF Recorder
-Capture crisp screen animations without heavy third-party software:
-- **Clean Outside Control Bar**: The recording HUD (Timer, Stop, Pause, Restart, Cancel) floats strictly **outside** your capture box, keeping your output 100% clean.
-- **Subtle Mouse Halo**: Automatically draws a soft translucent yellow halo around your cursor with zero border stroke, ensuring viewers follow your clicks effortlessly.
-- **Instant Save**: Pure native color quantization and lossless LZW encoding with no FFmpeg required.
+### 3. 🎞️ Lightweight GIF Recorder
+- 🎛️ **Out-of-Frame Controls** – The recording toolbar (Pause, Stop, Restart) sits completely outside the capture area, keeping your output clean.
+- 🟡 **Cursor Highlights** – Adds a subtle yellow glow around the cursor so clicks and actions are clear in guides and demos.
+- 📦 **Standalone Export** – Generates optimized GIFs instantly using native LZW encoding—no FFmpeg or third-party binaries required.
 
 ---
 
-### 4. 🔤 Universal Multi-Language OCR & Casing Switcher
-Extract text from images, scanned documents, video subtitles, or protected web pages in seconds:
-- **Any-Language Engine**: Built-in multi-lingual Tesseract engine detects English, Bengali, and 100+ worldwide languages.
-- **Instant Casing Switcher**: Convert recognized text with a single click:
-  - **Normal / Original**: Preserves original capitalization and format.
-  - **`UPPERCASE`**: Capitalizes every character.
-  - **`lowercase`**: Converts entire text to lowercase.
-  - **`Title Case`**: Capitalizes the first letter of each word.
-  - **`Single Line`**: Strips newline breaks for quick pasting into search bars or terminal commands.
+### 4. 🔤 OCR & Text Tools
+Extract text from images, videos, protected web pages, and PDF scans in seconds:
+- 🌐 **100+ Languages** – Built-in offline OCR powered by Tesseract (supports English, Bengali, and many others).
+- 🔀 **One-Click Case Formatting** – Clean up extracted text before copying:
+  - **Original** – Keeps the source casing and line breaks intact.
+  - **`UPPERCASE`** / **`lowercase`** – Toggles all-caps or all-lowercase.
+  - **`Title Case`** – Capitalizes the first letter of each word.
+  - **`Single Line`** – Strips newlines for quick pasting into search bars or terminal prompts.
 
 ---
 
-### 5. 🎨 Professional Annotation Suite
+### 5. 🎨 Annotation Tools
 
-| Tool | Shortcut | Description |
+| Tool | Key | Description |
 | :--- | :---: | :--- |
-| **Select / Move** | `V` | Select, drag, resize, or delete existing annotations. |
-| **Rectangle** | `U` | Clean geometric framing box. |
-| **Ellipse / Circle** | `C` | Smooth circular or oval callout. |
-| **Arrow** | `A` | Directional indicator with subtle drop shadow for depth. |
-| **Line** | `L` | Clean straight connecting rule. |
-| **Pen / Freehand** | `P` | Natural vector drawing and handwritten marks. |
-| **Highlighter** | `H` | **True optical marker** with Multiply/Screen blending. Text underneath remains 100% legible and crisp! |
-| **Step Counter** | `N` | Automatic numbered badge (`①`, `②`, `③`...) for step-by-step documentation. |
-| **Text** | `T` | Direct on-canvas typographic annotation with adjustable font sizes. |
-| **Blur / Pixelate** | Toolbar | Obscure sensitive passwords, API keys, credentials, or faces. |
-| **Spotlight** | Toolbar | Darken surroundings and focus brightness on your focal point. |
+| **Select / Move** | `V` | Select, reposition, resize, or delete annotations. |
+| **Rectangle** | `U` | Box important UI areas or content sections. |
+| **Ellipse** | `C` | Circle focal points or specific details. |
+| **Arrow** | `A` | Point out key elements with a clear directional marker. |
+| **Line** | `L` | Draw straight dividers and connectors. |
+| **Pen** | `P` | Freehand drawing and handwritten sketches. |
+| **Highlighter** | `H` | Non-destructive marker using blend modes so text stays sharp underneath. |
+| **Step Counter** | `N` | Drop auto-incrementing numbered badges (`①`, `②`, `③`...) for tutorials. |
+| **Text** | `T` | Type notes directly on the image with adjustable sizes and fonts. |
+| **Blur / Pixelate** | Toolbar | Obscure API keys, passwords, faces, and sensitive info. |
+| **Spotlight** | Toolbar | Dim the surroundings to draw focus to a specific element. |
 
 ---
 
