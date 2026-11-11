@@ -1,0 +1,25 @@
+# Visual Studio & .NET Build Artifacts
+**/bin/
+**/obj/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
+.idea/
+
+# Windows OS Files
+Thumbs.db
+Desktop.ini
+
+# Temporary Test Files
+*.log
+*.tmp
+*.mp4
+test_*.mp4
+
+# Compiled Setup Installer (Published via GitHub Releases)
+Setup/
+
+# Reference Directory
+Reference/

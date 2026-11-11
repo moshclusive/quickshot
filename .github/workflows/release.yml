@@ -1,0 +1,62 @@
+name: Build and Release QuickShot
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build Setup Executable
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Install Inno Setup
+        run: choco install innosetup -y --no-progress
+
+      - name: Build QuickShot (Release x64)
+        shell: powershell
+        run: |
+          $csproj = (Get-ChildItem -Path . -Recurse -Filter "QuickShot.csproj").FullName
+          dotnet build $csproj -c Release
+
+      - name: Compile Inno Setup Installer
+        shell: powershell
+        run: |
+          $iss = (Get-ChildItem -Path . -Recurse -Filter "installer.iss").FullName
+          $iscc = "C:\Program Files (x86)\Inno Setup 6\ISCC.exe"
+          & $iscc $iss
+
+      - name: Verify Setup Artifact
+        shell: powershell
+        run: |
+          $setup = (Get-ChildItem -Path . -Recurse -Filter "QuickShot-Setup.exe").FullName
+          if (-not (Test-Path $setup)) { throw "QuickShot-Setup.exe not found!" }
+          $size = [Math]::Round((Get-Item $setup).Length / 1MB, 2)
+          Write-Host "Built setup artifact: $setup ($size MB)"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          name: QuickShot ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+          files: |
+            **/QuickShot-Setup.exe
