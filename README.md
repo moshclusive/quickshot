@@ -199,3 +199,4 @@ Crafted with care by [**Mosh**](https://github.com/moshclusive)
 ⭐ **If you find QuickShot useful, consider starring the repository on [GitHub](https://github.com/moshclusive/quickshot)!**
 
 </div>
+

@@ -589,25 +589,27 @@ namespace QuickShot.UI
 
             _thumb = LoadThumbSafe(item.FilePath);
 
-            var btnCopy = new DarkPillButton("📋", Color.FromArgb(40, 36, 62), Color.FromArgb(154, 127, 245), 26, 34)
+            var btnCopy = new DarkPillButton("", Color.FromArgb(40, 36, 62), Color.FromArgb(154, 127, 245), 26, 32)
             {
                 Location = new Point(Width - 116, 20),
-                BorderColor = Color.FromArgb(72, 64, 110)
+                BorderColor = Color.FromArgb(72, 64, 110),
+                IconImage = SvgIconRenderer.RenderToolIcon("copy", 14, Color.FromArgb(235, 235, 248))
             };
             btnCopy.Click += (s, e) => onCopy?.Invoke();
 
-            var btnOpen = new DarkPillButton("📁", Color.FromArgb(34, 34, 44), Color.FromArgb(52, 52, 68), 26, 34)
+            var btnOpen = new DarkPillButton("", Color.FromArgb(34, 34, 44), Color.FromArgb(52, 52, 68), 26, 32)
             {
                 Location = new Point(Width - 76, 20),
                 BorderColor = Color.FromArgb(56, 56, 70),
-                PillFontStyle = FontStyle.Regular
+                IconImage = SvgIconRenderer.RenderToolIcon("open", 14, Color.FromArgb(235, 235, 248))
             };
             btnOpen.Click += (s, e) => onOpen?.Invoke();
 
-            var btnDel = new DarkPillButton("🗑", Color.FromArgb(34, 34, 44), Color.FromArgb(180, 220, 38, 38), 26, 32)
+            var btnDel = new DarkPillButton("", Color.FromArgb(34, 34, 44), Color.FromArgb(180, 220, 38, 38), 26, 32)
             {
                 Location = new Point(Width - 38, 20),
-                BorderColor = Color.FromArgb(56, 56, 70)
+                BorderColor = Color.FromArgb(56, 56, 70),
+                IconImage = SvgIconRenderer.RenderToolIcon("delete", 14, Color.FromArgb(255, 180, 180))
             };
             btnDel.Click += (s, e) => onDelete?.Invoke();
 
@@ -832,13 +834,13 @@ namespace QuickShot.UI
                 using (var barPen = new Pen(Color.FromArgb(95, 154, 127, 245), 1f))
                     Theme.DrawRoundedRect(g, barPen, barRect, 7);
 
-                DrawHoverActionPill(g, RectCopy, _copiedFlash ? "✓" : "📋",
+                DrawHoverActionPill(g, RectCopy, _copiedFlash ? "check" : "copy",
                     _hoverAction == 1 || _copiedFlash ? Theme.Brand : Color.FromArgb(44, 38, 68),
                     Color.FromArgb(88, 76, 132));
-                DrawHoverActionPill(g, RectOpen, "📁",
+                DrawHoverActionPill(g, RectOpen, "open",
                     _hoverAction == 2 ? Color.FromArgb(56, 56, 72) : Color.FromArgb(36, 36, 46),
                     Color.FromArgb(66, 66, 82));
-                DrawHoverActionPill(g, RectDel, "🗑",
+                DrawHoverActionPill(g, RectDel, "delete",
                     _hoverAction == 3 ? Color.FromArgb(195, 220, 38, 38) : Color.FromArgb(36, 36, 46),
                     Color.FromArgb(66, 66, 82));
             }
@@ -859,16 +861,30 @@ namespace QuickShot.UI
                 g.DrawString(meta, mFont, mBr, new RectangleF(9, 129, 186, 15), sfM);
         }
 
-        private static void DrawHoverActionPill(Graphics g, Rectangle r, string text, Color fill, Color border)
+        private static void DrawHoverActionPill(Graphics g, Rectangle r, string iconName, Color fill, Color border)
         {
             using (var bg = new SolidBrush(fill))
                 Theme.FillRoundedRect(g, bg, r, 5);
             using (var pen = new Pen(border, 1f))
                 Theme.DrawRoundedRect(g, pen, r, 5);
-            using (var f = Theme.Font(8f, FontStyle.Bold))
-            using (var br = new SolidBrush(Color.White))
-            using (var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
-                g.DrawString(text, f, br, r, sf);
+
+            if (iconName == "check")
+            {
+                using var f = Theme.Font(9f, FontStyle.Bold);
+                using var br = new SolidBrush(Color.White);
+                using var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+                g.DrawString("✓", f, br, r, sf);
+            }
+            else
+            {
+                var icon = SvgIconRenderer.RenderToolIcon(iconName, 14, Color.FromArgb(235, 235, 248));
+                if (icon != null)
+                {
+                    int ix = r.X + (r.Width - 14) / 2;
+                    int iy = r.Y + (r.Height - 14) / 2;
+                    g.DrawImage(icon, ix, iy, 14, 14);
+                }
+            }
         }
 
         protected override void Dispose(bool disposing)

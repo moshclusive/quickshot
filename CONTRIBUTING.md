@@ -94,3 +94,4 @@ Please treat all members of the community with respect, kindness, and empathy. H
 ## 💬 Questions or Help?
 
 Feel free to start a discussion or open an issue on the [QuickShot GitHub repository](https://github.com/moshclusive/quickshot). Thank you for helping make QuickShot better for everyone!
+

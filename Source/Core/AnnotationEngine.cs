@@ -512,20 +512,6 @@ namespace QuickShot.Core
             int bw = bx2 - bx, bh = by2 - by;
             if (bw <= 0 || bh <= 0) return;
 
-            // Sample surface luminance around the stroke to detect light paper vs dark mode
-            double lumSum = 0;
-            int lumCnt = 0;
-            int stepIdx = Math.Max(1, item.Points.Count / 10);
-            for (int i = 0; i < item.Points.Count; i += stepIdx)
-            {
-                int sx = Math.Max(0, Math.Min(bgSource.Width - 1, (int)item.Points[i].X));
-                int sy = Math.Max(0, Math.Min(bgSource.Height - 1, (int)item.Points[i].Y));
-                Color px = bgSource.GetPixel(sx, sy);
-                lumSum += 0.299 * px.R + 0.587 * px.G + 0.114 * px.B;
-                lumCnt++;
-            }
-            bool isLightSurface = (lumCnt > 0 ? lumSum / lumCnt : 220) >= 115;
-
             // Ensure highlighter color has vibrant fluorescent saturation & brightness
             int hR = c.R, hG = c.G, hB = c.B;
             int maxCh = Math.Max(hR, Math.Max(hG, hB));
@@ -558,9 +544,10 @@ namespace QuickShot.Core
             Marshal.Copy(bdOut.Scan0, pOut, 0, bytes);
             Marshal.Copy(bdMask.Scan0, pMask, 0, bytes);
 
-            // True optical highlighter shader:
-            // Light surface: Multiply blend (dest = (src * tint) / 255) -> Black & colored text stays 100% sharp and readable!
-            // Dark surface: Screen blend (dest = 255 - ((255 - src) * (255 - tint)) / 255) -> Dark background gets highlighted, light text stays 100% sharp!
+            // True optical Multiply blend shader:
+            // Formula: Target = (Orig * Tint) / 255
+            // On white paper: page becomes glowing fluorescent highlighter, text stays razor-sharp pitch black!
+            // On dark mode: white text becomes glowing highlighter color, dark background stays dark! Text is 100% readable!
             float maxIntensity = 0.88f;
             for (int y = 0; y < bh; y++)
             {
@@ -576,21 +563,9 @@ namespace QuickShot.Core
                     byte origG = pOut[k + 1];
                     byte origR = pOut[k + 2];
 
-                    int targetB, targetG, targetR;
-                    if (isLightSurface)
-                    {
-                        // Multiply blend mode: text is completely preserved and razor sharp
-                        targetB = (origB * hB) / 255;
-                        targetG = (origG * hG) / 255;
-                        targetR = (origR * hR) / 255;
-                    }
-                    else
-                    {
-                        // Screen blend mode: illuminates dark background, leaves light text crisp
-                        targetB = 255 - ((255 - origB) * (255 - hB)) / 255;
-                        targetG = 255 - ((255 - origG) * (255 - hG)) / 255;
-                        targetR = 255 - ((255 - origR) * (255 - hR)) / 255;
-                    }
+                    int targetB = (origB * hB) / 255;
+                    int targetG = (origG * hG) / 255;
+                    int targetR = (origR * hR) / 255;
 
                     pOut[k] = (byte)(origB + (targetB - origB) * alpha);
                     pOut[k + 1] = (byte)(origG + (targetG - origG) * alpha);

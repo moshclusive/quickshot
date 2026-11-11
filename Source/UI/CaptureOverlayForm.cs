@@ -2188,17 +2188,14 @@ namespace QuickShot.UI
             if (hasActiveSelection)
             {
                 var r = _selectionRect.Value;
-                using (var outerShadow = new Pen(Color.FromArgb(165, 0, 0, 0), 2.4f))
-                using (var solidPen = new Pen(Color.Cyan, 1.6f))
+                using (var solidPen = new Pen(Color.FromArgb(0, 229, 255), 1.0f))
                 {
                     if (_selectMode == "free" && _freePoints.Count > 2 && _mode == OverlayCaptureMode.Region)
                     {
-                        g.DrawPolygon(outerShadow, _freePoints.ToArray());
                         g.DrawPolygon(solidPen, _freePoints.ToArray());
                     }
                     else
                     {
-                        g.DrawRectangle(outerShadow, r.X, r.Y, r.Width, r.Height);
                         g.DrawRectangle(solidPen, r.X, r.Y, r.Width, r.Height);
                     }
                 }

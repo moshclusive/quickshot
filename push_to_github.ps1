@@ -1,4 +1,4 @@
-﻿# QuickShot GitHub Publisher Script
+# QuickShot GitHub Publisher Script
 $ErrorActionPreference = "Stop"
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location $scriptDir
@@ -32,3 +32,4 @@ Write-Host "  Successfully Pushed to GitHub! 🎉       " -ForegroundColor Green
 Write-Host "==========================================" -ForegroundColor Green
 Write-Host "Next Step: Go to https://github.com/moshclusive/quickshot/releases/new" -ForegroundColor Yellow
 Write-Host "Select tag 'v1.0.0' and attach 'Setup\QuickShot-Setup.exe' (15.78 MB)." -ForegroundColor Yellow
+

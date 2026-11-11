@@ -261,6 +261,7 @@ namespace QuickShot.UI
 
         public Color PillTextColor { get; set; } = Color.White;
         public Color BorderColor { get; set; } = Color.Transparent;
+        public Image IconImage { get; set; }
 
         public bool Selected
         {
@@ -336,10 +337,19 @@ namespace QuickShot.UI
                 Theme.DrawRoundedRect(g, pen, rect, 6);
             }
 
-            using var font = Theme.Font(8.5f, PillFontStyle);
-            using var txtBr = new SolidBrush(PillTextColor);
-            using var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-            g.DrawString(_pillText ?? "", font, txtBr, new RectangleF(0, 0, Width, Height), sf);
+            if (IconImage != null)
+            {
+                int ix = (Width - IconImage.Width) / 2;
+                int iy = (Height - IconImage.Height) / 2;
+                g.DrawImage(IconImage, ix, iy, IconImage.Width, IconImage.Height);
+            }
+            else
+            {
+                using var font = Theme.Font(8.5f, PillFontStyle);
+                using var txtBr = new SolidBrush(PillTextColor);
+                using var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+                g.DrawString(_pillText ?? "", font, txtBr, new RectangleF(0, 0, Width, Height), sf);
+            }
         }
     }
 
