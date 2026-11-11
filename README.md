@@ -190,10 +190,6 @@ QuickShot includes powerful pro modifiers inspired by industry-standard graphic 
 
 ---
 
-## 🤝 DONATE
-
-Buy me a Coffee. Here is the [Coffee shop]([url](https://www.supportkori.com/moshclusive)) 😂
----
 
 ## 📄 License
 
